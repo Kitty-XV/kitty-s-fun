@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>花光比尔·盖茨的钱</title>
+    <link rel="icon" href="images/billgates.jpg">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <img src="images/billgates.jpg" alt="Bill Gates" class="bill-img">
+            <h1>花光比尔·盖茨的钱</h1>
+        </div>
+    </header>
+
+    <div class="sticky-balance">
+        <div class="balance-container">
+            $100,000,000,000
+        </div>
+    </div>
+
+    <main class="items-grid" id="items-grid">
+        <!-- Items will be injected here by JS -->
+    </main>
+
+    <div class="receipt-container hidden" id="receipt-container">
+        <h2>账单</h2>
+        <div id="receipt-list"></div>
+        <div class="total-row">
+            <span>总计</span>
+            <span id="receipt-total">$0</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

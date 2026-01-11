@@ -1,0 +1,231 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background-color: #f1f2f6;
+    color: #333;
+    padding-bottom: 100px;
+}
+
+/* Header */
+header {
+    background: #fff;
+    padding: 30px 20px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.bill-img {
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    margin-bottom: 25px;
+    object-fit: cover;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+/* Sticky Balance */
+.sticky-balance {
+    position: sticky;
+    top: 0;
+    background: linear-gradient(180deg, #2ecc71, #1abc9c);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.balance-container {
+    font-size: 32px;
+    font-weight: 900;
+    font-family: 'Roboto', monospace;
+}
+
+/* Grid Layout */
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+.item-card {
+    background: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 4px;
+    /* Simulating the clean look of the original */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item-card img {
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    max-width: 100%;
+}
+
+.item-name {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.item-price {
+    font-size: 20px;
+    color: #2ecc71;
+    font-weight: 500;
+    margin-bottom: 25px;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    user-select: none;
+    flex: 1;
+}
+
+.btn-sell {
+    background-color: #f1f2f6;
+    color: #333;
+}
+
+.btn-sell.active {
+    background-color: #f53b57;
+    color: white;
+}
+
+.btn-buy {
+    background-color: #f1f2f6;
+    color: #333;
+}
+
+.btn-buy.active {
+    background-color: #05c46b;
+    color: white;
+}
+
+.item-quantity {
+    width: 50px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    border: 1px solid #ccc;
+    padding: 10px 5px;
+    border-radius: 3px;
+    -moz-appearance: textfield;
+}
+
+.item-quantity::-webkit-outer-spin-button,
+.item-quantity::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Receipt */
+.receipt-container {
+    max-width: 400px;
+    margin: 50px auto 0;
+    background: white;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.receipt-container.hidden {
+    display: none;
+}
+
+.receipt-container h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.receipt-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+    font-weight: 700;
+}
+
+.receipt-item div:first-child {
+    text-align: left;
+    max-width: 60%;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    border-top: 2px solid #333;
+    padding-top: 10px;
+    margin-top: 10px;
+    font-weight: 900;
+    font-size: 20px;
+}
+
+/* Animations */
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.pop-anim {
+    animation: pop 0.2sease-in-out;
+}
+
+@media (max-width: 600px) {
+    .items-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .balance-container {
+        font-size: 24px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .bill-img {
+        width: 90px;
+        height: 90px;
+    }
+}
