@@ -43,7 +43,7 @@ const items = [
     { name: '豪宅', price: 45000000, img: 'mansion.jpg' },
     { name: '拍一部电影', price: 100000000, img: 'make-a-movie.jpg' },
     { name: '波音747', price: 148000000, img: 'boeing-747.jpg' },
-    { name: '蒙娜丽莎', price: 780000000, img: 'mona-lisa.jpg' },
+    { name: '蒙娜丽莎', price: 780000000, img: 'mona-lisa.jpg', unique: true },
     { name: '摩天大楼', price: 850000000, img: 'skyscraper.jpg' },
     { name: '豪华游轮', price: 930000000, img: 'cruise-ship.jpg' },
     { name: 'NBA球队', price: 2120000000, img: 'nba-team.jpg' }
@@ -71,6 +71,9 @@ function initGrid() {
     items.forEach((item, index) => {
         const itemCard = document.createElement('div');
         itemCard.className = 'item-card';
+        // Disable input for unique items if already bought (handled in updateUI, but structure needs strictly number input.
+        // For unique items, maybe we shouldn't even show input? Or just keep it clamped to 0/1.
+        // Let's keep input but it will be clamped.)
         itemCard.innerHTML = `
             <img src="images/${item.img}" alt="${item.name}">
             <div class="item-name">${item.name}</div>
@@ -102,6 +105,11 @@ function handleInput(index, value) {
 
     const item = items[index];
 
+    // Check unique constraint
+    if (item.unique && newQuantity > 1) {
+        newQuantity = 1;
+    }
+
     // Calculate max affordable quantity
     // Current Money + (Money currently tied up in this item)
     const availableMoneyForThisItem = currentMoney + (item.quantity * item.price);
@@ -132,8 +140,13 @@ function updateUI() {
         const sellBtn = document.getElementById(`sell-${index}`);
         const input = document.getElementById(`input-${index}`);
 
-        const canBuy = currentMoney >= item.price;
+        let canBuy = currentMoney >= item.price;
         const canSell = item.quantity > 0;
+
+        // Unique item logic
+        if (item.unique && item.quantity >= 1) {
+            canBuy = false;
+        }
 
         // Update Button States
         if (canBuy) {
@@ -157,9 +170,9 @@ function updateUI() {
             input.value = item.quantity;
         }
 
-        // If we clamped the value inside handleInput and we are currently editing it, 
+        // If we clamped the value inside handleInput and we are currently editing it,
         // we might want to forcefully update it to show the clamp effect immediately
-        // BUT doing so interrupts typing if done on every input event. 
+        // BUT doing so interrupts typing if done on every input event.
         // A compromise: check if the value in DOM matches state. If not, and it implies a clamp, update it.
         // For now, simpler is better: let the user type, but if they exceed, `handleInput` clamps state.
         // If we want to reflect clamp immediately in the input box:
@@ -202,6 +215,9 @@ function updateReceipt() {
 
 function buyItem(index) {
     const item = items[index];
+    // Check unique
+    if (item.unique && item.quantity >= 1) return;
+
     if (currentMoney >= item.price) {
         currentMoney -= item.price;
         item.quantity++;
